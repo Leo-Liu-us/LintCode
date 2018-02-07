@@ -1,0 +1,19 @@
+class Solution:
+    """
+    @param a: An integer
+    @param b: An integer
+    @return: The sum of a and b
+    """
+    def aplusb(self, a, b):
+        # write your code here
+        GUARD_BIT = 1 << 32
+        GUARD_BIT_COMPLIMENT = -GUARD_BIT
+        
+        while b != 0:
+            if b == GUARD_BIT:
+                return a ^ GUARD_BIT_COMPLIMENT
+            carry = a & b
+            a = a ^ b
+            b = carry << 1
+
+        return a
