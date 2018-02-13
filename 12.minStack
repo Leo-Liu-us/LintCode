@@ -1,0 +1,40 @@
+class MinStack:
+    
+    def __init__(self):
+        # do intialization if necessary
+        # use an auxiliary stack to store the min
+        self.main_stack = []
+        self.auxiliary_stack = []
+
+    """
+    @param: number: An integer
+    @return: nothing
+    """
+    def push(self, number):
+        # write your code here
+        # update main stack
+        self.main_stack.append(number)
+        # update auxiliary stack
+        if len(self.auxiliary_stack) == 0:
+            self.auxiliary_stack.append(number)
+        else:
+            if number < self.min():
+                self.auxiliary_stack.append(number)
+            else:
+                self.auxiliary_stack.append(self.min())
+
+    """
+    @return: An integer
+    """
+    def pop(self):
+        # write your code here
+        self.auxiliary_stack.pop()
+        return self.main_stack.pop()
+
+    """
+    @return: An integer
+    """
+    def min(self):
+        # write your code here
+        return self.auxiliary_stack[-1]
+
