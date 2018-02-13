@@ -1,0 +1,25 @@
+class Solution:
+    """
+    should mention in-place reverse in description
+    @param: str: An array of char
+    @param: offset: An integer
+    @return: nothing
+    """
+    def rotateString(self, str, offset):
+        # write your code here
+        def reverse(A, start, end):
+            """
+            in-place reverse A[start:end]
+            """
+            while start < end:
+                A[start], A[end] = A[end], A[start]
+                start += 1
+                end -= 1
+        if len(str) == 0:
+            return 
+        offset %= len(str)
+        if offset == 0:
+            return
+        reverse(str, 0, len(str) - 1)
+        reverse(str, 0, offset - 1)
+        reverse(str, offset, len(str) - 1)
