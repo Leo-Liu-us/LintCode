@@ -1,0 +1,23 @@
+class Solution:
+    """
+    @param: :  A list of integers
+    @return: A list of unique permutations
+    """
+
+    def permuteUnique(self, nums):
+        # write your code here
+        # base case
+        if len(nums) == 0:
+            return [[]]
+        if len(nums) == 1:
+            return [nums]
+        nums.sort()
+        res = []
+        previous_num = None
+        for i in range(len(nums)):
+            if nums[i] == previous_num:
+                continue
+            previous_num = nums[i]
+            for sub_set in self.permuteUnique(nums[:i] + nums[i+1:]):
+                res.append([nums[i]] + sub_set)
+        return res
