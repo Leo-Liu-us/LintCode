@@ -1,0 +1,17 @@
+class Solution:
+    """
+    @param: nums: A list of integers.
+    @return: A list of permutations.
+    """
+    def permute(self, nums):
+        # write your code here
+        # base case
+        if len(nums) == 0: 
+            return [[]]
+        if len(nums) == 1: 
+            return [nums]
+        res = []
+        for i in range(len(nums)):
+            for sub_set in self.permute(nums[:i] + nums[i+1:]):
+                res.append([nums[i]] + sub_set)
+        return res
