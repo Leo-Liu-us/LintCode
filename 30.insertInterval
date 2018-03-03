@@ -1,0 +1,31 @@
+"""
+Definition of Interval.
+class Interval(object):
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+"""
+
+
+class Solution:
+    """
+    @param: intervals: Sorted interval list.
+    @param: newInterval: new interval.
+    @return: A new interval list.
+    """
+    def insert(self, intervals, newInterval):
+        # write your code here
+        res = []
+        for i, interval in enumerate(intervals):
+            # non-overlapping case
+            if interval.start > newInterval.end:
+                res.append(newInterval)
+                res += intervals[i:]
+                return res
+            elif interval.end < newInterval.start:
+                res.append(interval)
+            # overlapping case
+            else: 
+                newInterval = Interval(min(interval.start, newInterval.start), max(interval.end, newInterval.end))
+        res.append(newInterval)
+        return res
