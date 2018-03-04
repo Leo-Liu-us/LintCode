@@ -1,0 +1,40 @@
+class Solution:
+    """
+    @param source : A string
+    @param target: A string
+    @return: A string denote the minimum window, return "" if there is no such a string
+    """
+    def minWindow(self, source , target):
+        # write your code here
+        count1 = {}; 
+        for char in target:
+            if char not in count1: 
+                count1[char] = 1
+            else: 
+                count1[char]+=1
+
+        count = len(target)
+        start = 0
+        minSize = len(source) + 1
+        minStart = 0
+        
+        for end in range(len(source)):
+            if source[end] in count1:
+                count1[source[end]] -= 1
+                if count1[source[end]] >= 0:
+                    count-=1
+            if count == 0:
+                while True:
+                    if source[start] in count1:
+                        if count1[source[start]] < 0:
+                            count1[source[start]] += 1
+                        else:
+                            break
+                    start += 1
+                if minSize > end - start + 1:
+                    minSize = end - start + 1
+                    minStart = start
+        if minSize == len(source) + 1: 
+            return ''
+        else:
+            return source[minStart:minStart+minSize]
