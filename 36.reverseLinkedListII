@@ -1,0 +1,41 @@
+"""
+Definition of ListNode
+class ListNode(object):
+    def __init__(self, val, next=None):
+        self.val = val
+        self.next = next
+"""
+
+class Solution:
+    """
+    @param head: ListNode head is the head of the linked list 
+    @param m: An integer
+    @param n: An integer
+    @return: The head of the reversed ListNode
+    """
+    def reverseBetween(self, head, m, n):
+        # write your code here
+        # use dummy node to simplify code
+        dummy_node = ListNode(0)
+        prev = dummy_node
+        curr = head
+        
+        # move prev, curr for the first part
+        for _ in range(m-1):
+            prev.next = curr
+            curr = curr.next
+            prev = prev.next
+        
+        # reverse the second part
+        start = None
+        end = curr
+        next = None
+        for x in range(m, n + 1):
+            next = curr.next
+            curr.next = start
+            start = curr
+            curr = next
+
+        prev.next = start
+        end.next = next
+        return dummy_node.next
